@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>
+  Blindfold Me!
+</title>
+</head>
+<body>
+
+
+<link rel="stylesheet" href="formstyles.css">
+  <h1>
+  What kind of night do you want?
+  </h1>
+
+  Price Range:<br>
+  <div id="slidecontainer">
+        &nbsp;&nbsp;&nbsp;&nbsp;$<input type="range" min="1" max="5" value="3" class="slider" id="pricerange">$$$$$
+  </div>
+
+<br>
+  <form action="">
+  Select an end time:<br>
+  <input type="time" name="usr_time" id="endtimeclock">
+  </form> 
+
+
+
+<button onClick="hi()">Submit</button>
+
+<script type="text/javascript">
+
+  function hi() {
+    var pr = document.getElementById("pricerange");
+    localStorage.price = pr.value;
+    var endtime = document.getElementById("endtimeclock");
+    localStorage.time = endtime.value;
+  }
+</script>
+</body>
+</html>
