@@ -9,10 +9,13 @@ body
 	font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
 }
 
+<<<<<<< HEAD
 
 
 
 
+=======
+>>>>>>> 70343bac6813463d102dc894534ceed67a47307c
 .slider 
 {
     -webkit-appearance: none;
@@ -64,6 +67,7 @@ button
 	font-size: 16px;
 	margin: 4px 2px;
 	cursor: pointer;
+<<<<<<< HEAD
 }
 
 
@@ -110,4 +114,6 @@ form{
 
 .endtimeclock {
     color: white;
+=======
+>>>>>>> 70343bac6813463d102dc894534ceed67a47307c
 }
