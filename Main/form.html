@@ -1,9 +1,14 @@
 <html>
-<head>
-<title>
-  Blindfold Me!
-</title>
-</head>
+  <head>
+     <title>
+    Blindfold Me!
+    </title>
+
+    <script src="./js/location.js"></script>
+    <script src="./vendor/jquery/jquery.js"></script>
+
+    
+  </head>
 <body>
 
 
@@ -13,9 +18,7 @@
   </h1>
 
   Price Range:<br>
-  <div id="slidecontainer">
-<<<<<<< HEAD
-        &nbsp;&nbsp;&nbsp;&nbsp;$<input type="range" min="1" max="5" value="3" class="slider" id="pricerange">$$$
+  <div id="slidecontainer">$<input type="range" min="1" max="5" value="3" class="slider" id="pricerange">$$$
   </div>
 
 <!--time field-->
@@ -36,18 +39,13 @@
   </div>
   <br>
 
-=======
-        &nbsp;&nbsp;&nbsp;&nbsp;$<input type="range" min="1" max="5" value="3" class="slider" id="pricerange">$$$$$
-  </div>
-
-<br>
-  <form action="">
-  Select an end time:<br>
-  <input type="time" name="usr_time" id="endtimeclock">
-  </form> 
+  <!--Location-->
+  <p><button onclick="geoFindMe()">Show my location</button></p>
+    <div id="out"></div>
 
 
->>>>>>> 70343bac6813463d102dc894534ceed67a47307c
+
+
 
 <button onClick="hi()">Submit</button>
 
@@ -58,12 +56,10 @@
     localStorage.price = pr.value;
     var endtime = document.getElementById("endtimeclock");
     localStorage.time = endtime.value;
-<<<<<<< HEAD
     var searchBox = document.getElementById("search");
     localStorage.search = search.value; 
   
-=======
->>>>>>> 70343bac6813463d102dc894534ceed67a47307c
+
   }
 </script>
 </body>

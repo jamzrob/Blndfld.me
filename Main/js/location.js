@@ -1,15 +1,9 @@
-
-
-
-
-
 function geoFindMe() {
 
-
-
+  console.log("test");
 
   var output = document.getElementById("out");
- 
+
   if (!navigator.geolocation){
     output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
     return;
@@ -26,8 +20,8 @@ function geoFindMe() {
 
     output.appendChild(img);
 
-    console.log(latitude );
     console.log(longitude);
+    console.log(latitude);
   }
 
   function error() {
