@@ -6,45 +6,24 @@
         <title></title>
     </head>
     <body>
-        <div id="app">
-            <button @click="loginWithUber">Login with Uber</button>
-        </div>
+            <button onclick="loginWithUber()">Login with Uber</button>
         <script>
-            new Vue({
-                el: '#app',
-                data: {
-                    
-                },
-                mounted() {
-                    var url = new URL(window.location.href);
-                    var code = url.searchParams.get("code");
-                    var token = url.searchParams.get("token");
-                    if(code){
-                        console.log("Code: "+code);
-                        fetch("http://127.0.0.1/getToken/"+code).then(response => response.text()).then(
-                            text =>{
-                                console.log("We got the token!");
-                                localStorage.uberToken = JSON.parse(text).access_token;
-                                console.log(localStorage.uberToken);
-                                window.location.href = "http://127.0.0.1/app";
-                            }
-                        );
-                    }else{
-                        console.log("No code");
-                    }
-                    if(token){
-                        console.log("Token: "+token);
-                    }else{
-                        console.log("No Token");
-                    }
-                },
-                methods: {
-                    loginWithUber(){
-                        let loginURL = "https://login.uber.com/oauth/v2/authorize?client_id=JYapbqi3iPPitJR6PHifGN0To2qhsPUi&response_type=code";
-                        window.location.href = loginURL;
-                    }
-                }
-            });
+            var url = new URL(window.location.href);
+            var code = url.searchParams.get("code");
+            var token = url.searchParams.get("token");
+            if(code){
+                console.log("Code: "+code);
+                fetchToken(code).then( () => {
+                    window.location.href = "http://127.0.0.1/app";
+                });
+            }else{
+                console.log("No code");
+            }
+            if(token){
+                console.log("Token: "+token);
+            }else{
+                console.log("No Token");
+            }
         </script>
     </body>
 </html>
