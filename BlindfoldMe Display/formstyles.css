@@ -1,0 +1,113 @@
+body 
+{
+	background-image: url("header.jpg");
+	-moz-background-size: cover;
+    -webkit-background-size: cover;
+	text-align: center;
+	font-size: 30px;
+	color: white;
+	font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
+}
+
+
+
+
+
+.slider 
+{
+    -webkit-appearance: none;
+    width: 70%;
+    height: 15px;
+    border-radius: 5px;   
+    background: #3bb000;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1; 
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px; 
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer; 
+}
+
+input
+{
+	font-size: 20px;
+	font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif; }
+
+button
+{
+	background-color: #888888;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+}
+
+
+.dark{
+    background: url('./images/dark_grey.jpg');
+}
+.dark input[type=text]{
+    border:1px solid #2a2e31;
+    background-color:#2d3035;
+    color:white;
+}
+input[type=button], input[type=button]:hover {
+    position:relative; 
+    left:-6px;
+    border:1px solid #adc5cf;
+    background: #e4f1f9; /* Old browsers */
+    background: -moz-linear-gradient(top, #e4f1f9 0%, #d5e7f3 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e4f1f9), color-stop(100%,#d5e7f3)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #e4f1f9 0%,#d5e7f3 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #e4f1f9 0%,#d5e7f3 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #e4f1f9 0%,#d5e7f3 100%); /* IE10+ */
+    background: linear-gradient(top, #e4f1f9 0%,#d5e7f3 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e4f1f9', endColorstr='#d5e7f3',GradientType=0 ); /* IE6-9 */
+    color:#7da2aa;
+    cursor: pointer;
+}
+input[type=text]{
+    color:white;
+}
+form{
+    width:500px;
+    margin:0 auto;
+}
+.search { 
+    padding:6px 15px 6px 30px;
+    margin:3px; 
+    background: url('./images/search.png') no-repeat 8px 6px; 
+}
+.rounded { 
+    border-radius:15px; 
+    -moz-border-radius:15px; 
+    -webkit-border-radius:15px; 
+}
+
+.endtimeclock {
+    color: white;
+}
