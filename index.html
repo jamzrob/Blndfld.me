@@ -24,6 +24,20 @@
     <!-- Custom styles for this template -->
     <link href="css/creative.css" rel="stylesheet">
 
+    <script src="/js/uber.js"></script>
+    <script>
+      let url = new URL(window.location.href);
+      let code = url.searchParams.get("code");
+      let token = localStorage.uberToken;
+      if(code){
+          fetchToken(code, text => {
+              localStorage.uberToken = text.access_token;
+              window.location.href ="http://127.0.0.1";
+          });
+      }else if(token){
+        window.location.href = "http://127.0.0.1/form"
+      }
+    </script>
   </head>
 
   <body id="page-top">
@@ -44,7 +58,7 @@
               <a class="nav-link js-scroll-trigger" href="#examplenight">example night</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/login">start now</a>
+              <a class="nav-link js-scroll-trigger" onclick="loginWithUber()">start now</a>
             </li>
           </ul>
         </div>
@@ -69,7 +83,7 @@
             <h2 class="section-heading text-white">Have a personal tour guide plan your evening!</h2>
             <hr class="light">
             <p class="text-faded">From transportation to entertainment, Blindfold Me! plans your evening. When you use the service, you are not told what lies next until you arrive at the destination. Perfect for big groups or "you nights" and for all price ranges!</p>
-            <a class="btn btn-default btn-xl js-scroll-trigger" href="#examplenight">Get Started!</a>
+            <a class="btn btn-default btn-xl js-scroll-trigger" onclick="loginWithUber()">Get Started!</a>
           </div>
         </div>
       </div>
@@ -119,7 +133,7 @@
     <div class="call-to-action bg-dark">
       <div class="container text-center">
         <h2>Have the night of your life tonight!</h2>
-        <a class="btn btn-default btn-xl sr-button" href="/login.html">Start Now!</a>
+        <a class="btn btn-default btn-xl sr-button" onclick="loginWithUber()">Start Now!</a>
       </div>
     </div>
 

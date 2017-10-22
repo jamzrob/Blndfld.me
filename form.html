@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>
+         Blindfold Me!
+      </title>
+      <script
+         src="https://code.jquery.com/jquery-3.2.1.min.js"
+         integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+         crossorigin="anonymous"></script>
+      <script src="/js/location.js"></script>
+      <script src="/js/save.js"></script>
+      <script>
+         let token = localStorage.uberToken;
+         if(!token){
+           window.location.href = "http://127.0.0.1"
+         }
+      </script>
+   </head>
+   <body>
+      <link rel = "stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="/css/index.css">
+      <h1>What kind of night do you want?</h1>
+      <p>Price Range:</p>
+      <div id="slidecontainer">$<input type="range" min="1" max="5" value="3" class="slider" id="pricerange">$$$
+      </div>
+      <!--time field-->
+      <br>
+      <form action="">
+         Time:<br>
+         <input type="time" name="usr_time"
+            id="endtimeclock">
+      </form>
+      <!--enter field-->
+      <br>
+      <div class = "dark">
+         <form>
+            <span><input type= "text" class="search rounded" id="search"placeholder="What do you want?"></span>
+         </form>
+      </div>
+      <br>
+      <!--location-->
+      <div id="map"></div>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWjlAdP2BsE4D9mnOuxA-nLSS5akDmM10&callback=getLocation" async defer></script>
+      <!--submit button-->
+      <br><br>
+      <button onclick="saveResults()">Submit</button>
+   </body>
+</html>
