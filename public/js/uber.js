@@ -17,8 +17,12 @@ function getHeader(){
 
 // Redirect user to login page
 function loginWithUber(){
-    let loginURL = "https://login.uber.com/oauth/v2/authorize?client_id=JYapbqi3iPPitJR6PHifGN0To2qhsPUi&response_type=code";
-    window.location.href = loginURL;
+    if(getToken()){
+        window.location.href = "/form"
+    }else{
+        let loginURL = "https://login.uber.com/oauth/v2/authorize?client_id=JYapbqi3iPPitJR6PHifGN0To2qhsPUi&response_type=code";
+        window.location.href = loginURL;
+    }
 }
 
 // Get locally stored token

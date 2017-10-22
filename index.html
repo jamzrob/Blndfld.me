@@ -31,11 +31,10 @@
       let token = localStorage.uberToken;
       if(code){
           fetchToken(code, text => {
+              console.log(text);
               localStorage.uberToken = text.access_token;
-              window.location.href ="http://127.0.0.1";
+              window.location.href ="/form";
           });
-      }else if(token){
-        window.location.href = "http://127.0.0.1/form"
       }
     </script>
   </head>
