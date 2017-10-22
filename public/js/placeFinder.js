@@ -85,6 +85,8 @@ function getRestaurant(price, keywrd, startingLat, startingLong)
 
     /*setTimeout(printing, 1000);*/
 
+    localStorage.resterauntCoordinates = resterauntCoords
+
     
 
 }
