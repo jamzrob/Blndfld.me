@@ -29,7 +29,7 @@ function getToken(){
 // Get token from Uber from auth_code
 function fetchToken(auth_code, callback){
     let url = "https://login.uber.com/oauth/v2/token?client_id="+client_id
-                +"&client_secret="+client_secret+"&grant_type=authorization_code&redirect_uri=http://blndfld.me&code=" + auth_code;
+                +"&client_secret="+client_secret+"&grant_type=authorization_code&redirect_uri=https://blndfld.me&code=" + auth_code;
     fetch(url,{
         method: "POST"
     }).then(response => response.json()).then(json => callback(json));
