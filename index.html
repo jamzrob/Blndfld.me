@@ -1,28 +1,41 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="https://unpkg.com/vue"></script>
         <script src="/uber.js"></script>
         <title></title>
     </head>
     <body>
             <button onclick="loginWithUber()">Login with Uber</button>
         <script>
-            var url = new URL(window.location.href);
-            var code = url.searchParams.get("code");
-            var token = url.searchParams.get("token");
+            let url = new URL(window.location.href);
+            let code = url.searchParams.get("code");
+            let token = localStorage.uberToken;
+            //cancelCurrentRide();
             if(code){
-                console.log("Code: "+code);
-                fetchToken(code).then( () => {
-                    window.location.href = "http://127.0.0.1/app";
+                fetchToken(code, text => {
+                    localStorage.uberToken = text.access_token;
+                    window.location.href ="http://127.0.0.1";
                 });
             }else{
-                console.log("No code");
-            }
-            if(token){
-                console.log("Token: "+token);
-            }else{
-                console.log("No Token");
+                if(token){
+                    getUserData(data =>{
+                        console.log(data);
+                    })
+                    console.log("Have Token");
+                    let sa = 36.141179;
+                    let so = -86.796622;
+                    let ea = 36.160201;
+                    let eo = -86.779193;
+                    getRideEstimate(sa, so, ea, eo, data => {
+                        console.log(data);
+                        console.log(data.fare.fare_id);
+                        requestRide(data.fare.fare_id, sa, so, ea, eo, data => {
+                            console.log(data);
+                            cancelCurrentRide()
+                        })
+                    });
+                    console.log("3")
+                }
             }
         </script>
     </body>
