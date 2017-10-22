@@ -41,19 +41,20 @@ function getUserData(callback){
 
 // Get ride estimate
 function getRideEstimate(start_lat, start_long, end_lat, end_long, callback){
-    var body = {
+    var b = {
         "start_latitude": start_lat,
         "start_longitude": start_long,
         "end_latitude": end_lat,
         "end_longitude": end_long
     }
+    console.log(JSON.stringify(b));
 
     var url = base_url+"/requests/estimate";
 
     fetch(url,{
         method: "POST",
         headers: getHeader(),
-        body: JSON.stringify(body)
+        body: JSON.stringify(b)
     }).then(response => response.json()).then(json=> callback(json));
 }
 

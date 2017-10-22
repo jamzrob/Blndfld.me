@@ -1,0 +1,52 @@
+body 
+{
+	background-image: url("/img/header.jpg");
+	-moz-background-size: cover;
+    -webkit-background-size: cover;
+	text-align: center;
+	font-size: 30px;
+	color: white;
+	font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
+}
+
+ul,
+li
+{
+	list-style-type: square;
+	text-align: center;
+	font-size: 30px;
+	color: white;
+	font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.center
+{
+	width:500px;
+	margin:0 auto;
+	text-align: left;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.spoil
+{
+	background-color: #888888;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script
+	src="https://code.jquery.com/jquery-3.2.1.min.js"
+	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="/css/liststyles.css">
+	<title>
+		Spoil the surprise!
+	</title>
+	<script>
+		let token = localStorage.uberToken;
+		if(!token){
+			window.location.href = "http://127.0.0.1"
+		}
+	</script>
+
+</head>
+<body>
+	<h1>Spoil the surprise!</h1>
+	<h2>Tonight, you will</h2>
+	
+	<!--YOU NEED THE ARRAY FROM JAKE!!!!! -->
+	<div class="center">
+	<p></p>
+		<table>
+		<tr>
+			<th>Time</th>
+			<th>Place</th>
+		</tr>
+			<script>
+				function addTime(hours, minutes){
+					currentTimeMin += minutes;
+					if(currentTimeMin >= 60){
+						currentTimeMin = currentTimeMin % 60;
+						currentTimeHour++;
+					}
+					currentTimeHour += hours;
+					if(currentTimeHour >= 24){
+						currentTimeHour-=24;
+					}
+					if (currentTimeMin < 10){
+						return "" + currentTimeHour+ ":0" + currentTimeMin;
+					}
+					return "" + currentTimeHour+ ":" + currentTimeMin;
+				}
+
+				var p = JSON.parse(localStorage.places);
+				var places = [];
+				for(let i=0;i<4;i++){
+					let place = p[i];
+					console.log(place);
+					places.push(place.name);
+				}
+				var currentTimeHour = 19;
+				var currentTimeMin = 30;
+				var uberTimeLengths = [10, 20, 4];
+				var estimatedtimeAtLocation = [60, 45, 100];
+
+				$("table").append("<tr><th>" + currentTimeHour + ":"+ currentTimeMin + "</th><th>Starting location</th>")
+				
+
+				
+				for (var i = 0; i < places.length; i++) {
+  					if(currentTimeMin < 10){
+  						$("table").append("<tr><th>" + currentTimeHour + ":0" + currentTimeMin + "-" + addTime(0, uberTimeLengths[i])+"<th>Ride in Uber</th>");
+  					}
+  					else{
+  						$("table").append("<tr><th>" + currentTimeHour + ":" + currentTimeMin + "-" + addTime(0, uberTimeLengths[i])+"<th>Ride in Uber</th>");
+  					}
+ 					if(currentTimeMin < 10){
+  						$("table").append("<tr><th>" + currentTimeHour + ":0" + currentTimeMin + "-" + addTime(0, estimatedtimeAtLocation[i])+"<th>" + places[i] + "</th>");
+  					}
+  					else{
+  						$("table").append("<tr><th>" + currentTimeHour + ":" + currentTimeMin + "-" + addTime(0, estimatedtimeAtLocation[i])+"<th>" + places[i] + "</th>");
+  					}					
+
+
+  					$("table").append("</tr>");
+  				}
+
+
+  		  	</script>  	
+
+  		  	</table>
+  </div>
+</body>
+
+</html>

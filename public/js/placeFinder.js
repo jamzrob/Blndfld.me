@@ -30,6 +30,9 @@ function returnFunc(a)
     options = a;
 }
 
+let places = [];
+let count = 0;
+
 function saveResults() {
     var pr = document.getElementById("pricerange");
     localStorage.price = pr.value;
@@ -43,26 +46,28 @@ function saveResults() {
     var searchBox = document.getElementById("search");
     localStorage.search = search.value; 
 
+    localStorage.placeCount = 0;
+    localStorage.currentPlace = 0;
 
     //gets the latitude and longitude values
     getActivity(localStorage.price, 
                     localStorage.latitude, 
-                    localStorage.longitude,true);
+                    localStorage.longitude,true,0);
     getRestaurant(localStorage.price, 
                     localStorage.search, 
                     localStorage.latitude, 
-                    localStorage.longitude);
+                    localStorage.longitude,1);
     getDessert(localStorage.price, 
                     localStorage.latitude, 
-                    localStorage.longitude);
+                    localStorage.longitude,2);
     getActivity(localStorage.price, 
                     localStorage.latitude, 
-                    localStorage.longitude,false);
+                    localStorage.longitude,false,3);
 
     console.log("called getRestaurant");
 }
 
-function getActivity(price, startingLat, startingLong, free)
+function getActivity(price, startingLat, startingLong, free, i)
 {
     var type = '';
     if (free)
@@ -79,13 +84,18 @@ function getActivity(price, startingLat, startingLong, free)
         activityName = place[num].name;
         console.log(activityName)
         activityCoords = getPlaceCoords(place,num);
-        console.log(activityCoords);
-        localStorage.activityCoordinates = activityCoords;
+        console.log("ac cords"+activityCoords);
+        let data = {latitude: activityCoords[0], longitude: activityCoords[1], name: activityName};
+        places.push(data);
+        count++;   
+        if(count==4){
+            pushArray()
+        } 
     });
     
 }
 
-function getRestaurant(price, keywrd, startingLat, startingLong)
+function getRestaurant(price, keywrd, startingLat, startingLong,i)
 {
     setOptions(price, 'restaurant', keywrd, startingLat, startingLong, function(place){
         console.log(place);
@@ -94,12 +104,17 @@ function getRestaurant(price, keywrd, startingLat, startingLong)
         console.log(restaurantName)
         restaurantCoords = getPlaceCoords(place,num);
         console.log(restaurantCoords);
-        localStorage.resterauntCoordinates = restaurantCoords;
+        let data = {latitude: restaurantCoords[0], longitude: restaurantCoords[1], name: restaurantName};
+        places.push(data);
+        count++;   
+        if(count==4){
+            pushArray()
+        } 
     });
     
 }
 
-function getDessert(price, startingLat, startingLong)
+function getDessert(price, startingLat, startingLong,i)
 {
     setOptions(price, '', 'ice cream', startingLat, startingLong, function(place){
         console.log(place);
@@ -108,8 +123,19 @@ function getDessert(price, startingLat, startingLong)
         console.log(dessertName)
         dessertCoords = getPlaceCoords(place,num);
         console.log(dessertCoords);
-        localStorage.dessertCoordinates = dessertCoords;
+        let data = {latitude: dessertCoords[0], longitude: dessertCoords[1], name: dessertName};
+        places.push(data);
+        count++;   
+        if(count==4){
+            pushArray()
+        }  
     });
+}
+
+function pushArray(){
+    console.log("Saved array")
+    localStorage.places = JSON.stringify(places);
+    window.location.href = "http://127.0.0.1/plan";
 }
 
 var printing = function printResterauntCoords ()

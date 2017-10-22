@@ -8,8 +8,9 @@
          src="https://code.jquery.com/jquery-3.2.1.min.js"
          integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
          crossorigin="anonymous"></script>
+       <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWjlAdP2BsE4D9mnOuxA-nLSS5akDmM10&libraries=places"></script>         
       <script src="/js/location.js"></script>
-      <script src="/js/save.js"></script>
+      <script src="/js/placeFinder.js"></script>
       <script>
          let token = localStorage.uberToken;
          if(!token){
@@ -39,9 +40,6 @@
          </form>
       </div>
       <br>
-      <!--location-->
-      <div id="map"></div>
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWjlAdP2BsE4D9mnOuxA-nLSS5akDmM10&callback=getLocation" async defer></script>
       <!--submit button-->
       <br><br>
       <button onclick="saveResults()">Submit</button>
