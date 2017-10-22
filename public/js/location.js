@@ -23,8 +23,9 @@ function showPosition(position) {
 
     var myLatLng = {lat: position.coords.latitude, lng: position.coords.longitude};
 
-    console.log(position.coords.latitude);
-    console.log(position.coords.longitude);
+    localStorage.latitude = position.coords.latitude;
+    localStorage.longitude = position.coords.longitude;
+   
     map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: position.coords.latitude, lng: position.coords.longitude},
     zoom: zoomIndex
