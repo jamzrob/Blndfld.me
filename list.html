@@ -6,31 +6,116 @@
 	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="/css/liststyles.css">
-	<title>
-		Spoil the surprise!
-	</title>
-	<script>
-		let token = localStorage.uberToken;
-		if(!token){
-			window.location.href = "http://127.0.0.1"
-		}
-	</script>
+	<link rel = "stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="/js/uber.js"></script>
+    <title>
+		Your night awaits!
+    </title>
+    
+    <script>
+            let token = localStorage.uberToken;
+            if(!token){
+                window.location.href = "http://127.0.0.1"
+            }
+        </script>
 
 </head>
 <body>
-	<h1>Spoil the surprise!</h1>
+    <h1>Your night awaits!</h1>
+    <div id="timer"></div>
 	<h2>Tonight, you will</h2>
-	
 	<!--YOU NEED THE ARRAY FROM JAKE!!!!! -->
 	<div class="center">
-	<p></p>
-		<table>
-		<tr>
-			<th>Time</th>
-			<th>Place</th>
-		</tr>
+
+		<table class="container">
+		<thread><tr>
+			<th><h1>Time<h1></th>
+			<th><h1>Place</h1></th>
+		</tr></thread>
+			<tbody>
 			<script>
+                var count = 0;
+
+                var places = [];
+                var stops = [];
+                var currentTimeHour = 0;
+                var currentTimeMin = 0;
+                var uberTimeLengths = []
+                var estimatedtimeAtLocation = [];
+
+                var counter = 0;
+                var p = JSON.parse(localStorage.places);
+                var names = [];
+                var times = [];
+				for(let i=0;i<4;i++){
+					let place = p[i];
+					console.log(place);
+                    names.push(place.name);
+                    let sa = 0;
+                    let so = 0;
+                    let ea = 0;
+                    let eo = 0;
+                    if(i==0){
+                        sa = localStorage.latitude;
+                        so = localStorage.longitude;
+                    }else{
+                        sa = p[i-1].latitude;
+                        so = p[i-1].longitude;
+                    }
+                    if(i==4){
+                        ea = place.latitude;
+                        eo = place.longitude;
+                    }else{
+                        ea = p[i].latitude;
+                        eo = p[i].longitude;
+                    }
+                    getRideEstimate(sa, so, ea, eo, data => {
+                        console.log(data);
+                        console.log(data.fare.fare_id);
+                        let uberTime = data.trip.duration_estimate/60;
+                        times.push(uberTime);
+                        counter++;
+                        if(counter==4){
+                            //Add real values from jake and joey
+                            places = ["park","restaurant", "dessert", "bar"];
+                            stops = names
+                            currentTimeHour = localStorage.hour;
+                            currentTimeMin = localStorage.minute;
+                            uberTimeLengths = times;
+                            console.log("times="+times);
+                            estimatedtimeAtLocation = [30, 60, 30, 90];
+
+
+                            $("table").append("<tr><th>" + updateTime() + '</th><th><i class="fa fa-location-arrow" aria-hidden="true"></i></th>')
+                            
+
+                            
+                            for (var i = 0; i < places.length; i++) {
+                                if(currentTimeMin < 10){
+                                    $("table").append("<tr><th>" + addTime(0, uberTimeLengths[i])+"<th>" + getFontAwesome("uber") + "</th>");
+                                }
+                                else{
+                                    $("table").append("<tr><th>"  +  addTime(0, uberTimeLengths[i])+"<th>" + getFontAwesome("uber") + "</th>");
+                                }
+                                if(currentTimeMin < 10){
+                                    $("table").append("<tr><th>" + addTime(0, estimatedtimeAtLocation[i])+"<th>" + getFontAwesome(places[i]) + "</th>");
+                                }
+                                else{
+                                    $("table").append("<tr><th>" + addTime(0, estimatedtimeAtLocation[i])+"<th>" + getFontAwesome(places[i]) + "</th>");
+                                }					
+
+
+                                $("table").append("</tr>");
+                            }
+
+                            $("table").append("<tr><th>Completed events</th><th></th></tr>");
+                        }
+                    });
+				}
+
+				var arraysOfTime = [];
 				function addTime(hours, minutes){
+					var time = updateTime()
 					currentTimeMin += minutes;
 					if(currentTimeMin >= 60){
 						currentTimeMin = currentTimeMin % 60;
@@ -40,50 +125,107 @@
 					if(currentTimeHour >= 24){
 						currentTimeHour-=24;
 					}
-					if (currentTimeMin < 10){
-						return "" + currentTimeHour+ ":0" + currentTimeMin;
+					arraysOfTime.push(time);
+					return time;
+					
+				}
+
+				function updateTime(){
+					if(currentTimeHour > 12){
+						if (currentTimeMin < 10){
+							return "" + (currentTimeHour-12) + ":0" + currentTimeMin + "PM";
+						}
+						return "" + (currentTimeHour-12)+ ":" + currentTimeMin + "PM";
 					}
-					return "" + currentTimeHour+ ":" + currentTimeMin;
+					if(currentTimeHour ==0){
+							if (currentTimeMin < 10){
+								return "" + 12 + ":0" + currentTimeMin + "AM";
+						}
+						return "" + 12 + ":" + currentTimeMin + "AM";
+					}
+					if (currentTimeMin < 10){
+							return "" + currentTimeHour+ ":0" + currentTimeMin + "AM";
+						}
+					return "" + currentTimeHour+ ":" + currentTimeMin + "AM";
 				}
 
-				var p = JSON.parse(localStorage.places);
-				var names = [];
-				for(let i=0;i<4;i++){
-					let place = p[i];
-					console.log(place);
-					names.push(place.name);
+				function getFontAwesome(type){
+					dict = {"uber":'<i class="fa fa-taxi" aria-hidden="true"></i>', "restaurant":'<i class="fa fa-cutlery" aria-hidden="true"></i>', "park":'<i class="fa fa-tree" aria-hidden="true"></i>', "museum":'<i class="fa fa-book" aria-hidden="true"></i>', "dessert":'<i class="fa fa-smile-o" aria-hidden="true"></i>', "bar": '<i class="fa fa-beer" aria-hidden="true"></i>'};
+					return dict[type];
 				}
-				var currentTimeHour = 19;
-				var currentTimeMin = 30;
-				var uberTimeLengths = [10, 20, 4];
-				var estimatedtimeAtLocation = [60, 45, 100];
 
-				$("table").append("<tr><th>" + currentTimeHour + ":"+ currentTimeMin + "</th><th>Starting location</th>")
-				
+				//TODO!!!
+				function callNextUber(){
+                    let place = p[count];
+                    let sa = 0;
+                    let so = 0;
+                    let ea = 0;
+                    let eo = 0;
+                    if(count==0){
+                        sa = localStorage.latitude;
+                        so = localStorage.longitude;
+                    }else{
+                        sa = p[count-1].latitude;
+                        so = p[count-1].longitude;
+                    }
+                    if(count==4){
+                        ea = place.latitude;
+                        eo = place.longitude;
+                    }else{
+                        ea = p[count].latitude;
+                        eo = p[count].longitude;
+                    }
+                    getRideEstimate(sa, so, ea, eo, data => {
+                        console.log(data);
+                        console.log(data.fare.fare_id);
+                        let uberTime = data.pickup_estimate;
+                        document.getElementById("timer").innerHTML = "Your Uber will be here in " + uberTime + " minutes"
+                        requestRide(data.fare.fare_id, sa, so, ea, eo, data => {
+                            console.log("Scheduled Uber: "+JSON.stringify(data));
+                            if(sandbox){
+                                cancelCurrentRide()
+                            }
+                        })
+                    });
+				}
 
-				
-				for (var i = 0; i < places.length; i++) {
+				function buttonClicked(){
+                    callNextUber();
+					fillNextTable();
+				}
+
+				function fillNextTable(){
+  					num = count;
+  					index = num*2;
+  					if(num >= places.length){
+                        document.getElementById("thebutton").hidden = true;
+  						return;
+  					}
   					if(currentTimeMin < 10){
-  						$("table").append("<tr><th>" + currentTimeHour + ":0" + currentTimeMin + "-" + addTime(0, uberTimeLengths[i])+"<th>Ride in Uber</th>");
+  						$("table").append("<tr><th>" + arraysOfTime[index] +"<th>" + "Uber ride" + "</th>");
   					}
   					else{
-  						$("table").append("<tr><th>" + currentTimeHour + ":" + currentTimeMin + "-" + addTime(0, uberTimeLengths[i])+"<th>Ride in Uber</th>");
+  						$("table").append("<tr><th>"  +  arraysOfTime[index]+"<th>" + "Uber ride" + "</th>");
   					}
  					if(currentTimeMin < 10){
-  						$("table").append("<tr><th>" + currentTimeHour + ":0" + currentTimeMin + "-" + addTime(0, estimatedtimeAtLocation[i])+"<th>" + places[i] + "</th>");
+  						$("table").append("<tr><th>" + arraysOfTime[index+1]+"<th>" + stops[num] + "</th>");
   					}
   					else{
-  						$("table").append("<tr><th>" + currentTimeHour + ":" + currentTimeMin + "-" + addTime(0, estimatedtimeAtLocation[i])+"<th>" + places[i] + "</th>");
+  						$("table").append("<tr><th>" + arraysOfTime[index+1]+"<th>" + stops[num] + "</th>");
   					}					
 
 
   					$("table").append("</tr>");
-  				}
-
-
+                      count++;
+                      
+				}
   		  	</script>  	
-
+  		  	</tbody>
   		  	</table>
+  		  	<button id="thebutton" class="next" onclick="buttonClicked()">Call Next Uber</button>
+  		  	<p>
+
+  		  	</p>
   </div>
 </body>
 

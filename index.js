@@ -27,7 +27,7 @@ app.get("/form", (req, res) => {
 })
 
 app.get("/plan", (req, res) => {
-    res.sendFile(path.join(__dirname, "list2.html"));
+    res.sendFile(path.join(__dirname, "list.html"));
 })
 
 /**********************************************************************************************************/
