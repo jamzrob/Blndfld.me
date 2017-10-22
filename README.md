@@ -1,2 +1,0 @@
-# Blindfold.us
-
