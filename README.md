@@ -1,10 +1,7 @@
 # Blndfld.me
 Built for Vandy iv
 
-What is the move? Let us tell you.
-
-
-##What's the move? Let us show you.
+## What's the move? Let us show you.
 
 ## Inspiration
 
