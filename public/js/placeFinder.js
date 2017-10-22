@@ -1,8 +1,10 @@
 var randNum = 0;
 var options = [];
+var activityName = '';
 var activityCoords = [0,0];
 var restaurantName = '';
 var restaurantCoords = [0,0];
+var dessertName = '';
 var dessertCoords = [0,0];
 //var day = [[0,0],[0,0],[0,0]];
 //var types = ['art_gallery','bar','bowling_alley','cafe','movie_theater','museum','night_club','park','restaurant','shopping_mall'];
@@ -27,12 +29,8 @@ function returnFunc(a)
     console.log(a)
     options = a;
 }
-function getActivity(price, type, keywrd, startingLat, startingLong)
-{
-    setOptions(price, type, keywrd, startingLat, startingLong, function(place){console.log(place);activityCoords = getPlaceCoords(place,getRandGeneral(place));console.log(activityCoords);});
-}
 
- function saveResults() {
+function saveResults() {
     var pr = document.getElementById("pricerange");
     localStorage.price = pr.value;
 
@@ -47,48 +45,71 @@ function getActivity(price, type, keywrd, startingLat, startingLong)
 
 
     //gets the latitude and longitude values
-
+    getActivity(localStorage.price, 
+                    localStorage.latitude, 
+                    localStorage.longitude,true);
     getRestaurant(localStorage.price, 
                     localStorage.search, 
                     localStorage.latitude, 
                     localStorage.longitude);
+    getDessert(localStorage.price, 
+                    localStorage.latitude, 
+                    localStorage.longitude);
+    getActivity(localStorage.price, 
+                    localStorage.latitude, 
+                    localStorage.longitude,false);
 
     console.log("called getRestaurant");
+}
 
-
-  }
-
-
+function getActivity(price, startingLat, startingLong, free)
+{
+    var type = '';
+    if (free)
+    {
+        type = 'park';
+    }
+    else
+    {
+        type = 'bar';
+    }
+    setOptions(price, type, '', startingLat, startingLong, function(place){
+        console.log(place);
+        var num = getRandGeneral(place);
+        activityName = place[num].name;
+        console.log(activityName)
+        activityCoords = getPlaceCoords(place,num);
+        console.log(activityCoords);
+        localStorage.activityCoordinates = activityCoords;
+    });
+    
+}
 
 function getRestaurant(price, keywrd, startingLat, startingLong)
 {
-
-    /*console.log(price);
-
-    console.log(keywrd);
-
-    console.log(startingLat);
-
-    console.log(startingLong);*/
-
     setOptions(price, 'restaurant', keywrd, startingLat, startingLong, function(place){
-
-
         console.log(place);
         var num = getRandGeneral(place);
         restaurantName = place[num].name;
         console.log(restaurantName)
         restaurantCoords = getPlaceCoords(place,num);
         console.log(restaurantCoords);
-
+        localStorage.resterauntCoordinates = restaurantCoords;
     });
-
-    /*setTimeout(printing, 1000);*/
-
-    localStorage.resterauntCoordinates = resterauntCoords
-
     
+}
 
+function getDessert(price, startingLat, startingLong)
+{
+    setOptions(price, '', 'ice cream', startingLat, startingLong, function(place){
+        console.log(place);
+        var num = getRandGeneral(place);
+        dessertName = place[num].name;
+        console.log(dessertName)
+        dessertCoords = getPlaceCoords(place,num);
+        console.log(dessertCoords);
+        localStorage.dessertCoordinates = dessertCoords;
+    });
 }
 
 var printing = function printResterauntCoords ()
@@ -97,12 +118,6 @@ var printing = function printResterauntCoords ()
 
 };
 
-
-function getDessert(price, startingLat, startingLong)
-{
-
-    setOptions(price, '', 'ice cream', startingLat, startingLong, function(place){console.log(place);dessertCoords = getPlaceCoords(place,getRandGeneral(place));console.log(dessertCoords);});
-}
 function getPlaceCoords(arr,num)
 {
     return [arr[num].geometry.location.lat(), arr[num].geometry.location.lng()];
