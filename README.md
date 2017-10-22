@@ -38,7 +38,8 @@ Starting off this app, we all had very little experience programming in JavaScri
 
 We could easily monetize our system by sending our users on promoted journies and have some businesses favored over others in our sorting algorithm of planning the night. As well, we would like to incorporate more preferences into the user's events and allow the user to split the cost of the uber rides with multiple people. We could also add accounts to our system so that way people could save their past preferences and use them to guide future trips and journeys. Everyone on our team wants to continue working on the application and can foresee implementing more features on this application and will definitely be promoting our final product. We did not get the chance to experience a Blndfld.me travel experience and are looking forward to doing this in the future. 
 
-##Reviews
+
+## Reviews
 
 _Really cool_
 -Steve
