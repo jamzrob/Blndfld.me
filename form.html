@@ -16,6 +16,7 @@
          if(!token){
            window.location.href = "http://127.0.0.1"
          }
+         getLocation();
       </script>
    </head>
    <body>
@@ -43,5 +44,25 @@
       <!--submit button-->
       <br><br>
       <button onclick="saveResults()">Submit</button>
+      <script>
+        var date = new Date();
+        var hours = date.getHours();
+        var hour = "";
+        if(hours<10){
+          hour = "0"+hours
+        }else{
+          hour = hours;
+        }
+        var minutes = date.getMinutes();
+        var minute = ""
+        if(minutes<10){
+          minute = "0"+minutes
+        }else{
+          minute=minutes
+        }
+        console.log(hour+":"+minute);
+
+        document.getElementById('endtimeclock').value = hour+":"+minute;
+      </script>
    </body>
 </html>

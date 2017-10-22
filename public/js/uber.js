@@ -1,6 +1,12 @@
 const client_id = "JYapbqi3iPPitJR6PHifGN0To2qhsPUi";
 const client_secret = "2XAi582Dcd0O0lbD-8j6F99r3lCpm3_DbTe43Q4Q";
-const base_url = "https://sandbox-api.uber.com/v1.2"
+const sandbox = true;
+let base_url = ""
+if(sandbox){
+    base_url = "https://sandbox-api.uber.com/v1.2"
+}else{
+    base_url = "https://api.uber.com/v1.2"
+}
 
 function getHeader(){
     return {

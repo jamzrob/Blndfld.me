@@ -21,6 +21,7 @@ function setOptions(price, kind, keywrd, startingLat, startingLong, b)
                 keyword:keywrd,
                 maxPriceLevel:price},
                 function(data) {
+                    console.log("data="+data)
                     b(data);
                 });
 }
@@ -34,14 +35,12 @@ let places = [];
 let count = 0;
 
 function saveResults() {
+    var times = document.getElementById("endtimeclock").value.split(":");
+    localStorage.hour = parseInt(times[0]);
+    localStorage.minute = parseInt(times[1]);
+
     var pr = document.getElementById("pricerange");
     localStorage.price = pr.value;
-
-
-
-    var endtime = document.getElementById("endtimeclock");
-    localStorage.time = endtime.value;
-
 
     var searchBox = document.getElementById("search");
     localStorage.search = search.value; 
@@ -81,6 +80,8 @@ function getActivity(price, startingLat, startingLong, free, i)
     setOptions(price, type, '', startingLat, startingLong, function(place){
         console.log(place);
         var num = getRandGeneral(place);
+        console.log("place "+place)
+        console.log("num "+num)
         activityName = place[num].name;
         console.log(activityName)
         activityCoords = getPlaceCoords(place,num);
