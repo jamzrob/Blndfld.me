@@ -7,7 +7,7 @@ let path        = require('path'),
     logger      = require('morgan'),
     bodyParser  = require('body-parser');
 
-let port = process.env.PORT ? process.env.PORT : 8080;
+let port = process.env.PORT ? process.env.PORT : 80;
 let env = process.env.NODE_ENV ? process.env.NODE_ENV : 'dev';
 
 /**********************************************************************************************************/
@@ -18,7 +18,13 @@ if (env !== 'test') app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, './public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, "index.html"));
+});
 
+app.get("/form", (req, res) => {
+    res.sendFile(path.join(__dirname, "form.html"));
+})
 
 /**********************************************************************************************************/
 
