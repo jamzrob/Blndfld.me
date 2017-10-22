@@ -64,9 +64,7 @@ button
 }
 
 
-.dark{
-    background: url('./images/dark_grey.jpg');
-}
+
 .dark input[type=text]{
     border:1px solid #2a2e31;
     background-color:#2d3035;
@@ -97,7 +95,7 @@ form{
 .search { 
     padding:6px 15px 6px 30px;
     margin:3px; 
-    background: url('./images/search.png') no-repeat 8px 6px; 
+    
 }
 .rounded { 
     border-radius:15px; 
