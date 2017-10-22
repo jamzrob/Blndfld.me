@@ -136,7 +136,7 @@ function getDessert(price, startingLat, startingLong,i)
 function pushArray(){
     console.log("Saved array")
     localStorage.places = JSON.stringify(places);
-    window.location.href = "http://blndfld.me/plan";
+    window.location.href = "http://127.0.0.1/plan";
 }
 
 var printing = function printResterauntCoords ()
