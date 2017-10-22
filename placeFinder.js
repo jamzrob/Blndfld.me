@@ -1,6 +1,8 @@
 var randNum = 0;
 var options = [];
+var activityCoords = [0,0];
 var restaurantCoords = [0,0];
+var dessertCoords = [0,0];
 //var day = [[0,0],[0,0],[0,0]];
 //var types = ['art_gallery','bar','bowling_alley','cafe','movie_theater','museum','night_club','park','restaurant','shopping_mall'];
 //var type = 0;
@@ -24,9 +26,17 @@ function returnFunc(a)
     console.log(a)
     options = a;
 }
+function getActivity(price, type, keywrd, startingLat, startingLong)
+{
+    setOptions(price, type, keywrd, startingLat, startingLong, function(place){console.log(place);activityCoords = getPlaceCoords(place,getRandGeneral(place));console.log(activityCoords);});
+}
 function getRestaurant(price, keywrd, startingLat, startingLong)
 {
-    setOptions(price, 'restaurant', keywrd, startingLat, startingLong,function(place){console.log(place);restaurantCoords = getPlaceCoords(place,getRandGeneral(place));console.log(restaurantCoords);});
+    setOptions(price, 'restaurant', keywrd, startingLat, startingLong, function(place){console.log(place);restaurantCoords = getPlaceCoords(place,getRandGeneral(place));console.log(restaurantCoords);});
+}
+function getDessert(price, startingLat, startingLong)
+{
+    setOptions(price, '', 'ice cream', startingLat, startingLong, function(place){console.log(place);dessertCoords = getPlaceCoords(place,getRandGeneral(place));console.log(dessertCoords);});
 }
 function getPlaceCoords(arr,num)
 {
